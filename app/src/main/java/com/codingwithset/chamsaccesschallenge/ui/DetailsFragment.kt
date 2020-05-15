@@ -44,7 +44,6 @@ class DetailsFragment : Fragment() {
     }
 
 
-
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
@@ -68,7 +67,7 @@ class DetailsFragment : Fragment() {
                     }
 
                 } catch (exception: InterruptedException) {
-                    Log.e("DetailsFragment", exception.message!!)
+
                 }
             }
         }

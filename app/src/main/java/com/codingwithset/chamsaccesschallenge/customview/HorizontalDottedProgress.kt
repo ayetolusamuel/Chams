@@ -117,7 +117,7 @@ class HorizontalDottedProgress : View {
                 if (mDotPosition == mDotAmount) {
                     mDotPosition = 0
                 }
-                Log.d("INFOMETHOD", "----On Animation Repeat----")
+
             }
         })
         startAnimation(bounceAnimation)

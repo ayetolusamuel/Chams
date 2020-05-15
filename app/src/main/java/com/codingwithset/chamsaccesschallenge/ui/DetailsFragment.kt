@@ -2,16 +2,15 @@ package com.codingwithset.chamsaccesschallenge.ui
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.codingwithset.chamsaccesschallenge.R
 import com.codingwithset.chamsaccesschallenge.databinding.ActivityDetailBinding
 import java.text.SimpleDateFormat
-import java.util.*
+
 
 /**
  * A simple [DetailsFragment] class to handle
@@ -20,7 +19,7 @@ import java.util.*
 class DetailsFragment : Fragment() {
     private var _binding: ActivityDetailBinding? = null
     private val binding get() = _binding!!
-
+    private lateinit var thread: Thread
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,7 +30,7 @@ class DetailsFragment : Fragment() {
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
-       timeCountDown()
+
         super.onActivityCreated(savedInstanceState)
         binding.userList.setOnClickListener { view ->
             Navigation.findNavController(view).navigate(R.id.action_detailsFragment_to_userFragment)
@@ -40,17 +39,18 @@ class DetailsFragment : Fragment() {
         val name = arguments?.getString(getString(R.string.name_data_bundle))
         binding.helloName.text = getString(R.string.hello_name_string, name)
 
+        timeCountDown()
 
     }
 
 
     override fun onDestroy() {
         super.onDestroy()
-        _binding = null
+       _binding = null
     }
 
-   private fun timeCountDown() {
-        val t = object : Thread() {
+    private fun timeCountDown() {
+        thread = object : Thread() {
             @SuppressLint("SimpleDateFormat")
             override fun run() {
                 super.run()
@@ -61,7 +61,8 @@ class DetailsFragment : Fragment() {
                             val date = System.currentTimeMillis()
                             val format = SimpleDateFormat(getString(R.string.date_format_value))
                             val dateString = format.format(date)
-                            binding.currentDate.text = getString(R.string.current_time_string,dateString)
+                            binding.currentDate.text =
+                                getString(R.string.current_time_string, dateString)
 
                         }
                     }
@@ -71,7 +72,18 @@ class DetailsFragment : Fragment() {
                 }
             }
         }
-        t.start()
+        thread.start()
 
     }
+
+
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        val localThread = thread
+        localThread.interrupt()
+
+    }
+
+
 }

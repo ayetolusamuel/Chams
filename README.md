@@ -8,7 +8,6 @@ Chams android challenge task
 #Images
 
 ![](https://github.com/ayetolusamuel/Chams/blob/master/screenshoot/a1.PNG)
-
 ![](https://github.com/ayetolusamuel/Chams/blob/master/screenshoot/a2.PNG)
 
 ![](https://github.com/ayetolusamuel/Chams/blob/master/screenshoot/a3.PNG)
